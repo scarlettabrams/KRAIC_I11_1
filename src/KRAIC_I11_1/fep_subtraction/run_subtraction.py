@@ -135,7 +135,7 @@ def _run_watcher_with_settings(
     LOGGER.info(f"watching {watch_path}  ->  {out}   (Cancel to stop)")
     try:
         for p in watch_folder(watch_path, (ext,)):
-            for result in sub.process_file(p, out):
+            for result in sub.process_file(p, out, suffix="_subtraction"):
                 append_log(result, run_dir / log_name)
                 LOGGER.info(
                     " ".join(
