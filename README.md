@@ -110,4 +110,4 @@ curl -X POST https://i11-analysis.diamond.ac.uk/analyse -H "Content-Type: applic
     "log_name": "inline_log.csv"
   }
 }'
-```bash
+```
