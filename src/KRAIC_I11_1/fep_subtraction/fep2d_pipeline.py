@@ -292,6 +292,7 @@ def check_reference(
 
 def write_manifest(path: fm.PathLike, **items: Any) -> None:
     items.setdefault("pipeline", PIPELINE_VERSION)
-    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    fm.make_shared_dir(Path(path).parent)
     with open(path, "w") as fh:
         json.dump(items, fh, indent=2, default=str)
+    fm.share(path)

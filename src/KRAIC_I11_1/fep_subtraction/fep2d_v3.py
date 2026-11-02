@@ -42,6 +42,7 @@ from __future__ import annotations
 
 import csv
 import datetime
+import os
 import shutil
 from collections.abc import Callable, Iterator, Sequence
 from dataclasses import dataclass, field
@@ -66,6 +67,28 @@ DETECTOR_PATHS = (
     "entry1/detector/data",
     "entry/detector/data",
 )
+
+# Everything this code creates is rwx for all, so access is decided by the
+# parent folder alone (the analysis service writes as its own user).
+SHARED_MODE = 0o777
+
+
+def share(path: PathLike) -> None:
+    """chmod a created file/folder to SHARED_MODE. A path owned by someone else
+    cannot be chmod-ed; it is left as it is."""
+    try:
+        os.chmod(path, SHARED_MODE)
+    except PermissionError:
+        pass
+
+
+def make_shared_dir(path: PathLike) -> None:
+    """mkdir -p, then share() every folder that did not exist before."""
+    path = Path(path)
+    missing = [p for p in (path, *path.parents) if not p.exists()]
+    path.mkdir(parents=True, exist_ok=True)
+    for p in missing:
+        share(p)
 
 
 # ----------------------------------------------------------------------------
@@ -499,6 +522,7 @@ def write_corrected_nxs(
         p = _detector_path(fs)
         attrs = dict(fs[p].attrs)
     shutil.copy2(src, dst)
+    share(dst)  # raw files are often read-only and copy2 keeps that
     with h5py.File(dst, "r+") as f:
         try:
             del f[p]  # unlink only; never opens the (now dangling) target
@@ -558,6 +582,7 @@ def integrate_to_xy(
         comments="",
         fmt="%.6f",
     )
+    share(out_path)
 
 
 def process_run(
@@ -593,9 +618,9 @@ def process_run(
     **kw goes to subtract_frame / fit_scale (e.g. fit_region=, fit_offset=).
     """
     out_dir = Path(out_dir)
-    out_dir.mkdir(parents=True, exist_ok=True)
+    make_shared_dir(out_dir)
     if xy_dir:
-        Path(xy_dir).mkdir(parents=True, exist_ok=True)
+        make_shared_dir(xy_dir)
 
     csv_path = out_dir / "subtraction_diagnostics.csv"
     old_rows = {}
@@ -642,10 +667,12 @@ def process_run(
             w = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
             w.writeheader()
             w.writerows(rows)
+        share(csv_path)
     if errors:
         with open(out_dir / "subtraction_errors.csv", "w", newline="") as fh:
             w = csv.DictWriter(fh, fieldnames=["file", "error"])
             w.writeheader()
             w.writerows(errors)
+        share(out_dir / "subtraction_errors.csv")
     process_run.last_errors = errors  # pyright: ignore[reportFunctionMemberAccess]
     return rows

@@ -50,7 +50,6 @@ from __future__ import annotations
 import collections
 import csv
 import os
-import stat
 import time
 from collections.abc import Callable, Iterator, Sequence
 from pathlib import Path
@@ -171,13 +170,13 @@ class InlineSubtractor:
 
     # ------------------------------------------------------------------
     def process_file(
-        self, path: fm.PathLike, out_dir: fm.PathLike, suffix: str = ""
+        self, path: fm.PathLike, out_dir: fm.PathLike, suffix: str = "_subtraction"
     ) -> list[SubResult]:
         """Read a raw .hdf/.nxs (2D or 3D), subtract, and write each corrected frame to
         out_dir under the same name as tab 2 of the app does. Returns one SubResult per
         frame."""
         path, out_dir = Path(path), Path(out_dir)
-        out_dir.mkdir(parents=True, exist_ok=True)
+        fm.make_shared_dir(out_dir)
         results = []
         try:
             nfr = fm.n_frames_in_file(path)
@@ -187,16 +186,13 @@ class InlineSubtractor:
                 if r.ok and r.corrected is not None:
                     try:
                         dst = out_dir / f"{stem}{suffix}{path.suffix}"
-                        tmp = (
-                            out_dir / f".part_{dst.name}"
-                        )  # written under a hidden name, then renamed,
+                        # written under a hidden name, then renamed, so a reader
+                        # never sees a half-written file
+                        tmp = out_dir / f".part_{dst.name}"
                         fm.write_corrected_nxs(
                             path, tmp, r.corrected, i, self.ref, r.info
-                        )  # so a reader never
-                        os.chmod(
-                            tmp, stat.S_IREAD | stat.S_IWRITE
-                        )  # raw files are often read-only and the copy
-                        os.replace(tmp, dst)  # inherits that; sees a half-written file
+                        )
+                        os.replace(tmp, dst)
                         r.written = str(dst)
                         self._append_diag(out_dir, path.name, i, r.info)
                     except Exception as e:
@@ -223,6 +219,8 @@ class InlineSubtractor:
             if new:
                 w.writeheader()
             w.writerow(dict(order=self._order, file=fname, frame=frame_idx, **info))
+        if new:
+            fm.share(p)
         self._order += 1
 
 
@@ -231,13 +229,15 @@ class InlineSubtractor:
 # ----------------------------------------------------------------------------
 def append_log(res: SubResult, log_path: fm.PathLike) -> None:
     log_path = Path(log_path)
-    log_path.parent.mkdir(parents=True, exist_ok=True)
+    fm.make_shared_dir(log_path.parent)
     new = not log_path.exists()
     with open(log_path, "a", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=list(res.summary().keys()))
         if new:
             w.writeheader()
         w.writerow(res.summary())
+    if new:
+        fm.share(log_path)
 
 
 def _readable(p: fm.PathLike) -> bool:
