@@ -73,9 +73,9 @@ def run_subtraction_on_file(
     for w in sub.warnings:
         LOGGER.warning(w)
     run_dir = Path(outpath) / run_name
-    out = run_dir / "01_corrected_2D"
+    run_dir.mkdir(exist_ok=True, parents=True)
 
-    out.mkdir(exist_ok=True)
+    out = run_dir / "01_corrected_2D"
 
     results = sub.process_file(file_path, out)
     for result in results:
@@ -118,6 +118,9 @@ def _run_watcher_with_settings(
     for w in sub.warnings:
         LOGGER.warning(w)
     run_dir = Path(outpath) / run_name
+
+    run_dir.mkdir(parents=True, exist_ok=True)
+
     out = run_dir / "01_corrected_2D"
     fp.write_manifest(
         run_dir / "inline_manifest.json",
