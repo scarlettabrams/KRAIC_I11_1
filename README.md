@@ -88,12 +88,12 @@ Ideally we would write unit tests too - but this is experimental code, so we'll 
 curl -X POST https://i11-analysis.diamond.ac.uk/analyse -H "Content-Type: application/json" -d '{
   "analysis_name": "run_subtraction_on_file",
   "inputs": {
-    "file_path": "<path/to/raw.nxs>",
-    "outpath": "<path/to/processed/output_dir>",
-    "run_name": "<run_name>",
-    "merged_reference_npz_path": "<path/to/merged_reference.npz>",
-    "poni_path": "<path/to/calibration.poni>",
-    "mask_npy_path": "<path/to/mask.npy>",
+    "file_path": "/dls/i11-1/data/2026/cy40877-2/i11-1-146471.nxs",
+    "outpath": "/dls/i11-1/data/2026/cy40877-2/processing/inline_demo",
+    "run_name": "run_007",
+    "merged_reference_npz_path": "/dls/i11-1/data/2026/cy40877-2/processing/inline_demo/merged_reference.npz",
+    "poni_path": "/dls/i11-1/data/2026/cy40877-2/processing/inline_demo/X3_CBZcalib.poni",
+    "mask_npy_path": "/dls/i11-1/data/2026/cy40877-2/processing/inline_demo/X3_CBZcalib_mask.npy",
     "extra_mask": null,
     "npt": 2000,
     "rmin": 1.0,
@@ -106,8 +106,7 @@ curl -X POST https://i11-analysis.diamond.ac.uk/analyse -H "Content-Type: applic
     "min_fit_frac": 0.50,
     "drift_sigma": 5.0,
     "noise_factor": 2.0,
-    "min_history": 10,
-    "log_name": "inline_log.csv"
+    "min_history": 10
   }
 }'
 ```

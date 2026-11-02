@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import Any
 
 import numpy as np
 import pyFAI
@@ -35,7 +34,7 @@ def run_subtraction_on_file(
     drift_sigma: float = 5.0,
     noise_factor: float = 2.0,
     min_history: int = 10,
-) -> list[dict[str, Any]]:
+) -> str:
     """Build the Settings from the arguments and subtract every frame in a single
     raw .hdf/.nxs file, writing the corrected frames to
     outpath/run_name/01_corrected_2D.
@@ -91,7 +90,7 @@ def run_subtraction_on_file(
             )
         )
 
-    return [r.model_dump() for r in results]
+    return f"{Path(file_path).stem} {run_name} complete"
 
 
 def _run_watcher_with_settings(
