@@ -106,7 +106,7 @@ def _run_watcher_with_settings(
     log_name: str = "inline_log.csv",
 ) -> None:
 
-    if "processed" not in outpath:
+    if "process" not in outpath:
         raise ValueError("You should only be writing data to /processed folders!")
 
     sub = InlineSubtractor(
