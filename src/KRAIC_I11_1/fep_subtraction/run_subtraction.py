@@ -41,7 +41,7 @@ def run_subtraction_on_file(
     outpath/run_name/01_corrected_2D.
     extra_mask=None uses fp.DEFAULT_EXTRA_MASK; pass [] for no extra mask."""
 
-    if "processed" not in outpath:
+    if "process" not in outpath:
         raise ValueError("You should only be writing data to /processed folders!")
 
     if extra_mask is None:
