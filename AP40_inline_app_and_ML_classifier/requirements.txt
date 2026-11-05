@@ -1,0 +1,11 @@
+# Python 3.10 to 3.12. Rehearsed on Python 3.13 on the beamline PC with current versions of these packages.
+numpy
+scipy
+h5py
+pandas
+xgboost        # the frozen classifier's model files are plain JSON
+pyFAI          # calibration, integration and the 2-theta mask
+pybaselines    # MOR baseline
+matplotlib
+plotly         # live viewer and pattern stacker
+streamlit>=1.37  # needed for the automatic refresh
