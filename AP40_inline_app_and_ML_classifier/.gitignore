@@ -1,0 +1,4 @@
+# Keep the frozen classifier's optional run-start template even though the repo ignores *.npz
+!ML_version1_2/template_run007.npz
+__pycache__/
+inline_last_session.json

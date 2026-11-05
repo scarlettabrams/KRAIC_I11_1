@@ -1,0 +1,15 @@
+version,test,frames,hits,hits_lost,hits_lost_pct,hits_unsure,false_hits,unsure_share
+V1.1,leave-one-run-out,2556,1020,10,0.98,132.0,13,0.168
+V1.1,LOR lower=0.005,2556,1020,3,0.29,,13,0.329
+V1.1,LOR lower=0.01,2556,1020,7,0.69,,13,0.227
+V1.1,leave-one-system-out: Carbamazepine,1169,405,0,0.0,,13,0.61
+V1.1,leave-one-system-out: DL-methionine,499,217,7,3.23,,4,0.136
+V1.1,leave-one-system-out: Glycine,422,116,0,0.0,,3,0.246
+V1.1,leave-one-system-out: L-histidine,409,282,3,1.06,,6,0.164
+V1.2,leave-one-run-out,2556,1023,6,0.59,126.0,14,0.142
+V1.2,LOR lower=0.005,2556,1023,1,0.1,,14,0.251
+V1.2,LOR lower=0.01,2556,1023,4,0.39,,14,0.179
+V1.2,leave-one-system-out: Carbamazepine,1169,413,1,0.24,,6,0.595
+V1.2,leave-one-system-out: DL-methionine,499,212,4,1.89,,0,0.126
+V1.2,leave-one-system-out: Glycine,422,116,1,0.86,,4,0.133
+V1.2,leave-one-system-out: L-histidine,409,282,3,1.06,,7,0.156

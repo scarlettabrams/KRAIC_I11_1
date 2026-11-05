@@ -1,0 +1,5 @@
+{
+ "lower": 0.01,
+ "upper": 0.9,
+ "note": "Chosen by Scarlett: upper 0.90 on 22 Oct 2026; lower changed from 0.02 to 0.01 on 27 Oct 2026 (V1.2 freeze decision, after held-out test 06 lost 3 hits at 0.02). Settings only: no retraining needed."
+}

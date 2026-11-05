@@ -1,0 +1,323 @@
+{
+ "version": "1.2",
+ "trained": "2026-10-27T11:32:42",
+ "base": "V1.1 (26 Oct decisions) + 27 Oct decision sheet",
+ "frames_label_changed_27oct": [
+  [
+   "D01",
+   "pixium_123216",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "D02",
+   "pixium_123269",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "D03",
+   "pixium_123303",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "D04",
+   "pixium_123306",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "D05",
+   "pixium_123313",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "D06",
+   "pixium_123321",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "D07",
+   "pixium_123327",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "D08",
+   "pixium_123329",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "D09",
+   "pixium_123335",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "D10",
+   "pixium_123339",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "D11",
+   "pixium_123350",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "D12",
+   "pixium_123367",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "D13",
+   "pixium_123376",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "D14",
+   "pixium_123393",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "D15",
+   "pixium_123433",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "D16",
+   "pixium_123440",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "D17",
+   "pixium_123447",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "D18",
+   "pixium_123450",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "D19",
+   "pixium_123455",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "D20",
+   "pixium_123520",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "D21",
+   "pixium_123522",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "D22",
+   "pixium_123527",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "D23",
+   "pixium_123530",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "C02",
+   "pixium_146575",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "C03",
+   "pixium_146579",
+   [
+    "hit"
+   ],
+   "non_hit"
+  ],
+  [
+   "C05",
+   "pixium_146591",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "C08",
+   "pixium_146628",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "C09",
+   "pixium_146647",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "C10",
+   "pixium_146649",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "C11",
+   "pixium_146661",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ],
+  [
+   "C14",
+   "pixium_146684",
+   [
+    "non_hit"
+   ],
+   "hit"
+  ]
+ ],
+ "rows_label_changed": 39,
+ "held_back": [],
+ "n_frames": 2556,
+ "n_hits": 1023,
+ "n_non_hits": 1533,
+ "scale_pos_weight": 1.4985,
+ "features": [
+  "n_peaks_z4",
+  "n_peaks_z6",
+  "n_peaks_z8",
+  "n_peaks_z10",
+  "n_peaks_z15",
+  "n_peaks_z25",
+  "max_z",
+  "mean_top5_z",
+  "sum_z_gt6",
+  "radial_std",
+  "radial_range",
+  "azim_R",
+  "n_rbin0",
+  "n_rbin1",
+  "n_rbin2",
+  "n_rbin3",
+  "n_rbin4",
+  "n_rbin5",
+  "n_blobs_z6",
+  "blob_area_med",
+  "blob_area_max",
+  "z_kurt",
+  "frac_z_gt3",
+  "nn_med"
+ ],
+ "xgboost": {
+  "n_estimators": 300,
+  "max_depth": 3,
+  "learning_rate": 0.05,
+  "subsample": 0.8,
+  "colsample_bytree": 0.8,
+  "seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "combine": "mean of 5 seeds"
+ },
+ "cutoffs": {
+  "lower": 0.02,
+  "upper": 0.9,
+  "note": "unchanged"
+ },
+ "libraries": {
+  "python": "3.13.16",
+  "xgboost": "3.4.1",
+  "sklearn": "1.9.1"
+ },
+ "input_md5": {
+  "training_frames_v1.csv": "2682d359d03fcf0dcd8b6509ac1ffe52",
+  "Label_decision_sheet_27Oct.xlsx": "1435a84f3bcc85f0f494c0a06a033dc3"
+ },
+ "model_md5": {
+  "xgb_seed0.json": "0df86cb6df50fc8a736d59b01e0b958c",
+  "xgb_seed1.json": "ae49be5bccf9491210bfaf611ca84ef4",
+  "xgb_seed2.json": "cd327de22d249e434a5fd69b3908514a",
+  "xgb_seed3.json": "ad55b94b2d04e1f10c535ef1d0caf1bf",
+  "xgb_seed4.json": "31cbe9a6323984608fd995558acd0146"
+ }
+}
